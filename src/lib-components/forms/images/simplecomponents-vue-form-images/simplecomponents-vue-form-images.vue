@@ -7,7 +7,15 @@
     @drop="handleFileDrop"
     class="simple-main"
   >
-    <span v-if="files != null && files.length != 0" class="simple-image-grid">
+    <span
+      v-if="files != null && files.length != 0"
+      :style="
+        columns
+          ? 'grid-template-columns: repeat(' + columns + ', 1fr) !important'
+          : ''
+      "
+      class="simple-image-grid"
+    >
       <div
         v-for="(file, fileIndex) in files"
         :key="fileIndex"
@@ -25,6 +33,15 @@
       <span v-if="text">{{ text }}</span>
       <span v-else><strong>Press here </strong>or drag the images</span>
     </h4>
+    <div v-if="files != null && files.length != 0" class="simple-image-resume">
+      <div>
+        <span>
+          {{ files.length }}
+          <span v-if="resume"> {{ resume }}</span>
+          <span v-else> images</span>
+        </span>
+      </div>
+    </div>
     <input
       type="file"
       @change="imageFunction"
@@ -47,6 +64,8 @@ export default {
     container: [Object, Array],
     text: String,
     name: String,
+    columns: Number,
+    resume: String,
   },
   data() {
     return {

@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+.simple-main {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  background-color: #dedede;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-position: center !important;
+  background-size: cover !important;
+  border-radius: 4px;
+  border: 1px solid #dedede;
+  font-family: 'Nunito', sans-serif;
+}
+
+.simple-background::before {
+  content: '';
+  padding-bottom: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.simple-background {
+  width: 100%;
+  position: relative;
+  background-position: center !important;
+  background-size: cover !important;
+  background-color: #dedede;
+  margin-left: 0;
+  margin-right: 0;
+  .simple-background-layer {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    .simple-background-center {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 15%;
+      position: absolute;
+      color: white;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      font-size: 0.85em;
+      bottom: 40%;
+      .simple-background-arrow:nth-child(1) {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      .simple-background-arrow:nth-child(2) {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      .simple-background-arrow {
+        width: 10%;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5em;
+        img {
+          width: 80%;
+        }
+      }
+      .simple-background-arrow::before {
+        content: '';
+        padding-bottom: 100%;
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+    .simple-background-tag {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 15%;
+      position: absolute;
+      color: white;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      font-size: 0.85em;
+      bottom: 0;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.7189250700280112) 36%,
+        rgba(0, 0, 0, 0.5144432773109244) 65%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      .simple-background-label {
+        margin-right: 0.35em;
+      }
+    }
+  }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.2s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.slide-fade-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
+  //transform: translateX(-5px);
+  opacity: 0;
+}

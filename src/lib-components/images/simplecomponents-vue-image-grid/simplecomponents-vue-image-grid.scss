@@ -10,7 +10,6 @@
   border-radius: 4px;
   border: 1px solid #dedede;
   font-family: 'Nunito', sans-serif;
-  cursor: pointer;
   h4 {
     strong {
       color: rgba($color: #000, $alpha: 0.7);
@@ -21,10 +20,6 @@
     padding-bottom: 1em;
     color: rgba($color: #000, $alpha: 0.6);
   }
-}
-
-.simple-hidden {
-  display: none;
 }
 
 .simple-image-grid {
@@ -88,6 +83,9 @@
         rgba(0, 0, 0, 0.5144432773109244) 65%,
         rgba(0, 0, 0, 0) 100%
       );
+      .simple-background-label {
+        margin-right: 0.35em;
+      }
     }
   }
 }
