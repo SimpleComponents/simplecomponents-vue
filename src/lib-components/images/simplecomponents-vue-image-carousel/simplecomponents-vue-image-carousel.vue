@@ -9,7 +9,7 @@
         :style="
           files != null && files.length != 0
             ? 'background: url(' + files[pointer].url + ')'
-            : 'background: url(' + require('./default.svg') + ')'
+            : 'background: url(' + defaultImage + ')'
         "
         class="simple-background"
       >
@@ -19,10 +19,10 @@
             class="simple-background-center"
           >
             <div class="simple-background-arrow" @click="previous()">
-              <img :src="require('./left.svg')" alt="" />
+              <img :src="leftImage" alt="" />
             </div>
             <div class="simple-background-arrow" @click="next()">
-              <img :src="require('./right.svg')" alt="" />
+              <img :src="rightImage" alt="" />
             </div>
           </div>
           <div v-if="$slots.default" class="simple-background-tag">
@@ -51,6 +51,9 @@ export default {
   },
   data() {
     return {
+      defaultImage: require('./../../../assets/img/default.svg'),
+      rightImage: require('./../../../assets/img/left.svg'),
+      leftImage: require('./../../../assets/img/right.svg'),
       files: this.images,
       pointer: 0,
       previousBackground: '',
