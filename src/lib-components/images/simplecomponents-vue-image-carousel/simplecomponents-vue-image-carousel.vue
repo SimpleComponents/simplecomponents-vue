@@ -9,21 +9,25 @@
         :style="
           files != null && files.length != 0
             ? 'background: url(' + files[pointer].url + ')'
-            : 'background: url(' + defaultImage + ')'
+            : ''
         "
         class="simple-background"
       >
         <div class="simple-background-layer">
           <div
-            v-if="files != null && files.length != 0"
             class="simple-background-center"
           >
-            <div class="simple-background-arrow" @click="previous()">
-              <img :src="leftImage" alt="" />
+            <div v-if="files != null && files.length != 0" class="simple-background-arrow" @click="previous()">
+              <left/>
             </div>
-            <div class="simple-background-arrow" @click="next()">
-              <img :src="rightImage" alt="" />
+            <div v-else></div>
+            <div class="simple-background-full">
+              <default v-if="files == null || files.length == 0"/>
             </div>
+            <div v-if="files != null && files.length != 0" class="simple-background-arrow" @click="next()">
+              <right/>
+            </div>
+            <div v-else></div>
           </div>
           <div v-if="$slots.default" class="simple-background-tag">
             <slot></slot>
@@ -41,8 +45,17 @@
 ></style>
 
 <script>
+import defaultSvg from './components/default.vue';
+import rightSvg from './components/right.vue';
+import leftSvg from './components/left.vue';
+
 export default {
   name: 'SimpleComponentsVueImageCarousel',
+  components: {
+    'default': defaultSvg,
+    'right': rightSvg,
+    'left': leftSvg
+  },
   props: {
     images: [Object, Array],
     auto: Boolean,
@@ -51,9 +64,6 @@ export default {
   },
   data() {
     return {
-      defaultImage: require('./../../../assets/img/default.svg'),
-      rightImage: require('./../../../assets/img/left.svg'),
-      leftImage: require('./../../../assets/img/right.svg'),
       files: this.images,
       pointer: 0,
       previousBackground: '',

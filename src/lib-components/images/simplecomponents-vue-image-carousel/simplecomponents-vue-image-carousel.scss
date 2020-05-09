@@ -27,7 +27,7 @@
   position: relative;
   background-position: center !important;
   background-size: cover !important;
-  background-color: #dedede;
+  background-color: rgba($color: #dedede, $alpha: 0.5);
   margin-left: 0;
   margin-right: 0;
   .simple-background-layer {
@@ -52,7 +52,7 @@
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
       }
-      .simple-background-arrow:nth-child(2) {
+      .simple-background-arrow:nth-child(3) {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
       }
@@ -64,8 +64,20 @@
         justify-content: center;
         align-items: center;
         padding: 0.5em;
-        img {
+        svg {
           width: 80%;
+        }
+        .simple-background-full {
+          width: 100%;
+          cursor: pointer;
+          display: flex;
+          background-color: red;
+          justify-content: center;
+          align-items: center;
+          padding: 0.5em;
+          svg {
+            width: 80%;
+          }
         }
       }
       .simple-background-arrow::before {
