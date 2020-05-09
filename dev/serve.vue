@@ -73,7 +73,11 @@ export default Vue.extend({
         </div>
       </SimplecomponentsVueImageGrid>
       <br />
-      <SimplecomponentsVueImageCarousel :images="images" :auto="true">
+      <SimplecomponentsVueImageCarousel
+        :images="images"
+        :auto="true"
+        :ratio="'16:9'"
+      >
       </SimplecomponentsVueImageCarousel>
     </div>
   </div>
