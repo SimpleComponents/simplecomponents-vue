@@ -17,14 +17,14 @@
           <div
             class="simple-background-center"
           >
-            <div v-if="files != null && files.length != 0" class="simple-background-arrow" @click="previous()">
+            <div v-if="files != null && files.length != 0 && files.length != 1" class="simple-background-arrow" @click="previous()">
               <left/>
             </div>
             <div v-else></div>
             <div class="simple-background-full">
               <default v-if="files == null || files.length == 0"/>
             </div>
-            <div v-if="files != null && files.length != 0" class="simple-background-arrow" @click="next()">
+            <div v-if="files != null && files.length != 0 && files.length != 1" class="simple-background-arrow" @click="next()">
               <right/>
             </div>
             <div v-else></div>
@@ -61,6 +61,7 @@ export default {
     auto: Boolean,
     backwards: Boolean,
     interval: Number,
+    ratio: String,
   },
   data() {
     return {
@@ -69,8 +70,27 @@ export default {
       previousBackground: '',
     };
   },
-  created() {},
+  created() {
+    this.setComponentRatio();
+  },
   methods: {
+    setComponentRatio() {
+      if(this.ratio) {
+        const numbers = this.ratio.split(":");
+        if(numbers.length == 2) {
+          let height = (Number(numbers[1])/Number(numbers[0]))*100;
+          const css = '.simple-background::before {padding-bottom: ' + height + '% !important;}';
+          let style = document.getElementById('simple-vue-image-carousel');
+          if(style) {
+            style.parentNode.removeChild(style);
+          }
+          style = document.createElement('style');
+          style.id = 'simple-vue-image-carousel';
+          style.appendChild(document.createTextNode(css));
+          document.head.appendChild(style);
+        }
+      }
+    },
     next() {
       if (this.files) {
         if (this.files.length == this.pointer + 1) {
@@ -97,7 +117,7 @@ export default {
   watch: {
     images() {
       this.files = this.images;
-      if (this.auto && this.files && this.files.length != 0) {
+      if (this.auto && this.files && this.files.length != 0 && this.files.length != 1) {
         this.$nextTick(function() {
           window.setInterval(
             () => {
@@ -111,6 +131,9 @@ export default {
           );
         });
       }
+    },
+    ratio() {
+      this.setComponentRatio();
     },
     pointer(newValue, oldValue) {
       if (this.files) {
