@@ -75,8 +75,8 @@ export default Vue.extend({
       <br />
       <SimplecomponentsVueImageCarousel
         :images="images"
-        :auto="true"
-        :ratio="'16:9'"
+        :auto="false"
+        :ratio="'2:1'"
       >
       </SimplecomponentsVueImageCarousel>
     </div>
@@ -90,6 +90,8 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 40em;
+  padding-bottom: 40em;
 }
 
 .simple-container-son {
