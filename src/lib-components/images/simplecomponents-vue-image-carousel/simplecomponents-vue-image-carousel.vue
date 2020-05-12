@@ -11,26 +11,40 @@
             ? 'background: url(' + files[pointer].url + ')'
             : ''
         "
+        :class="'simple-background-' + componentId"
         class="simple-background"
       >
         <div class="simple-background-layer">
-          <div
-            class="simple-background-center"
-          >
-            <div v-if="files != null && files.length != 0 && files.length != 1" class="simple-background-arrow" @click="previous()">
-              <left/>
+          <div class="simple-background-center">
+            <div
+              v-if="files != null && files.length != 0 && files.length != 1"
+              class="simple-background-arrow"
+              :class="'simple-background-arrow-' + componentId"
+              @click="previous()"
+            >
+              <left />
             </div>
             <div v-else></div>
             <div class="simple-background-full">
-              <default v-if="files == null || files.length == 0"/>
+              <default v-if="files == null || files.length == 0" />
             </div>
-            <div v-if="files != null && files.length != 0 && files.length != 1" class="simple-background-arrow" @click="next()">
-              <right/>
+            <div
+              v-if="files != null && files.length != 0 && files.length != 1"
+              class="simple-background-arrow"
+              :class="'simple-background-arrow-' + componentId"
+              @click="next()"
+            >
+              <right />
             </div>
             <div v-else></div>
           </div>
-          <div v-if="$slots.default" class="simple-background-tag">
-            <slot></slot>
+          <div v-for="(file, fileIndex) in files" :key="fileIndex">
+            <div v-if="fileIndex == pointer" class="simple-background-tag">
+              <slot :name="'content-' + file.key"></slot>
+            </div>
+            <div v-if="fileIndex == pointer" class="simple-background-shadow">
+              <slot :name="'content-shadow-' + file.key"></slot>
+            </div>
           </div>
         </div>
       </div>
@@ -52,9 +66,9 @@ import leftSvg from './components/left.vue';
 export default {
   name: 'SimpleComponentsVueImageCarousel',
   components: {
-    'default': defaultSvg,
-    'right': rightSvg,
-    'left': leftSvg
+    default: defaultSvg,
+    right: rightSvg,
+    left: leftSvg,
   },
   props: {
     images: [Object, Array],
@@ -68,6 +82,7 @@ export default {
       files: this.images,
       pointer: 0,
       previousBackground: '',
+      componentId: 'simple-components-vue-image-' + Date.now(),
     };
   },
   created() {
@@ -75,19 +90,43 @@ export default {
   },
   methods: {
     setComponentRatio() {
-      if(this.ratio) {
-        const numbers = this.ratio.split(":");
-        if(numbers.length == 2) {
-          let height = (Number(numbers[1])/Number(numbers[0]))*100;
-          const css = '.simple-background::before {padding-bottom: ' + height + '% !important;}';
-          let style = document.getElementById('simple-vue-image-carousel');
-          if(style) {
+      if (this.ratio) {
+        const numbers = this.ratio.split(':');
+        if (numbers.length == 2) {
+          let height = (Number(numbers[1]) / Number(numbers[0])) * 100;
+          let widthArrow = height * 0.09;
+          const css =
+            '.simple-background-' +
+            this.componentId +
+            '::before {padding-bottom: ' +
+            height +
+            '% !important;}';
+          const cssarrow =
+            '.simple-background-arrow-' +
+            this.componentId +
+            ' {width: ' +
+            widthArrow +
+            '% !important;}';
+          let style = document.getElementById(
+            'simple-vue-image-carousel-' + this.componentId
+          );
+          let arrow = document.getElementById(
+            'simple-vue-image-carousel-arrow-' + this.componentId
+          );
+          if (style) {
             style.parentNode.removeChild(style);
           }
+          if (arrow) {
+            arrow.parentNode.removeChild(arrow);
+          }
           style = document.createElement('style');
-          style.id = 'simple-vue-image-carousel';
+          arrow = document.createElement('style');
+          style.id = 'simple-vue-image-carousel-' + this.componentId;
           style.appendChild(document.createTextNode(css));
           document.head.appendChild(style);
+          arrow.id = 'simple-vue-image-carousel-arrow-' + this.componentId;
+          arrow.appendChild(document.createTextNode(cssarrow));
+          document.head.appendChild(arrow);
         }
       }
     },
@@ -117,7 +156,12 @@ export default {
   watch: {
     images() {
       this.files = this.images;
-      if (this.auto && this.files && this.files.length != 0 && this.files.length != 1) {
+      if (
+        this.auto &&
+        this.files &&
+        this.files.length != 0 &&
+        this.files.length != 1
+      ) {
         this.$nextTick(function() {
           window.setInterval(
             () => {

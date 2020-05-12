@@ -57,7 +57,8 @@
         border-bottom-left-radius: 4px;
       }
       .simple-background-arrow {
-        width: 10%;
+        z-index: 2;
+        width: 9%;
         background-color: rgba($color: #000000, $alpha: 0.5);
         cursor: pointer;
         display: flex;
@@ -71,7 +72,6 @@
           width: 100%;
           cursor: pointer;
           display: flex;
-          background-color: red;
           justify-content: center;
           align-items: center;
           padding: 0.5em;
@@ -90,25 +90,48 @@
     .simple-background-tag {
       width: 100%;
       display: flex;
+      cursor: pointer;
       justify-content: center;
-      align-items: center;
-      height: 15%;
+      align-items: flex-end;
+      z-index: 1;
+      height: 100%;
       position: absolute;
       color: white;
-      padding-top: 0.5em;
-      padding-bottom: 0.5em;
       font-size: 0.85em;
       bottom: 0;
+      * {
+        z-index: 1;
+      }
+    }
+
+    .simple-background-shadow {
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      // height: 15%;
+      z-index: 1;
+      position: absolute;
+      color: white;
+      font-size: 0.85em;
+      bottom: 0;
+      * {
+        z-index: 1;
+      }
       background: linear-gradient(
         0deg,
         rgba(0, 0, 0, 1) 0%,
-        rgba(0, 0, 0, 0.7189250700280112) 36%,
-        rgba(0, 0, 0, 0.5144432773109244) 65%,
+        rgba(0, 0, 0, 0.8) 10%,
+        rgba(0, 0, 0, 0.7) 20%,
+        rgba(0, 0, 0, 0.6) 30%,
+        rgba(0, 0, 0, 0.5) 45%,
+        rgba(0, 0, 0, 0.4) 55%,
+        rgba(0, 0, 0, 0.3) 65%,
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0.1) 90%,
         rgba(0, 0, 0, 0) 100%
       );
-      .simple-background-label {
-        margin-right: 0.35em;
-      }
     }
   }
 }
