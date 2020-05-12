@@ -75,9 +75,46 @@ export default Vue.extend({
       <br />
       <SimplecomponentsVueImageCarousel
         :images="images"
-        :auto="false"
+        :auto="true"
         :ratio="'2:1'"
       >
+        <div
+          v-for="(image, imageIndex) in images"
+          :key="imageIndex"
+          :slot="'content-' + image.key"
+          @click="printAlert('image with key: ' + image.key)"
+          class="simple-test-container"
+        >
+          <div>
+            <h3>Image with key {{ image.key }}</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
+              magnam voluptates natus maiores doloremque ea pariatur id.
+              Reprehenderit atque blanditiis veritatis eos iste aut laboriosam
+              aspernatur dicta dolores, doloremque deserunt.
+            </p>
+          </div>
+        </div>
+      </SimplecomponentsVueImageCarousel>
+      <br />
+      <SimplecomponentsVueImageCarousel :images="images">
+        <div
+          v-for="(image, imageIndex) in images"
+          :key="imageIndex"
+          :slot="'content-shadow-' + image.key"
+          @click="printAlert('image with key: ' + image.key)"
+          class="simple-test-container"
+        >
+          <div>
+            <h3>Image with key {{ image.key }}</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
+              magnam voluptates natus maiores doloremque ea pariatur id.
+              Reprehenderit atque blanditiis veritatis eos iste aut laboriosam
+              aspernatur dicta dolores, doloremque deserunt.
+            </p>
+          </div>
+        </div>
       </SimplecomponentsVueImageCarousel>
     </div>
   </div>
@@ -92,6 +129,14 @@ export default Vue.extend({
   align-items: center;
   padding-top: 40em;
   padding-bottom: 40em;
+}
+
+.simple-test-container {
+  height: 100%;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
 }
 
 .simple-container-son {

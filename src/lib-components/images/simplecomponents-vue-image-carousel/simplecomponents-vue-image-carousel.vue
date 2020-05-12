@@ -36,8 +36,13 @@
             </div>
             <div v-else></div>
           </div>
-          <div v-if="$slots.default" class="simple-background-tag">
-            <slot></slot>
+          <div v-for="(file, fileIndex) in files" :key="fileIndex">
+            <div v-if="fileIndex == pointer" class="simple-background-tag">
+              <slot :name="'content-' + file.key"></slot>
+            </div>
+            <div v-if="fileIndex == pointer" class="simple-background-shadow">
+              <slot :name="'content-shadow-' + file.key"></slot>
+            </div>
           </div>
         </div>
       </div>
