@@ -19,6 +19,7 @@
             <div
               v-if="files != null && files.length != 0 && files.length != 1"
               class="simple-background-arrow"
+              :class="'simple-background-arrow-' + componentId"
               @click="previous()"
             >
               <left />
@@ -30,6 +31,7 @@
             <div
               v-if="files != null && files.length != 0 && files.length != 1"
               class="simple-background-arrow"
+              :class="'simple-background-arrow-' + componentId"
               @click="next()"
             >
               <right />
@@ -92,22 +94,39 @@ export default {
         const numbers = this.ratio.split(':');
         if (numbers.length == 2) {
           let height = (Number(numbers[1]) / Number(numbers[0])) * 100;
+          let widthArrow = height * 0.09;
           const css =
             '.simple-background-' +
             this.componentId +
             '::before {padding-bottom: ' +
             height +
             '% !important;}';
+          const cssarrow =
+            '.simple-background-arrow-' +
+            this.componentId +
+            ' {width: ' +
+            widthArrow +
+            '% !important;}';
           let style = document.getElementById(
             'simple-vue-image-carousel-' + this.componentId
+          );
+          let arrow = document.getElementById(
+            'simple-vue-image-carousel-arrow-' + this.componentId
           );
           if (style) {
             style.parentNode.removeChild(style);
           }
+          if (arrow) {
+            arrow.parentNode.removeChild(arrow);
+          }
           style = document.createElement('style');
+          arrow = document.createElement('style');
           style.id = 'simple-vue-image-carousel-' + this.componentId;
           style.appendChild(document.createTextNode(css));
           document.head.appendChild(style);
+          arrow.id = 'simple-vue-image-carousel-arrow-' + this.componentId;
+          arrow.appendChild(document.createTextNode(cssarrow));
+          document.head.appendChild(arrow);
         }
       }
     },

@@ -73,49 +73,54 @@ export default Vue.extend({
         </div>
       </SimplecomponentsVueImageGrid>
       <br />
-      <SimplecomponentsVueImageCarousel
-        :images="images"
-        :auto="true"
-        :ratio="'2:1'"
-      >
-        <div
-          v-for="(image, imageIndex) in images"
-          :key="imageIndex"
-          :slot="'content-' + image.key"
-          @click="printAlert('image with key: ' + image.key)"
-          class="simple-test-container"
-        >
-          <div>
-            <h3>Image with key {{ image.key }}</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
-              magnam voluptates natus maiores doloremque ea pariatur id.
-              Reprehenderit atque blanditiis veritatis eos iste aut laboriosam
-              aspernatur dicta dolores, doloremque deserunt.
-            </p>
-          </div>
+      <div class="simple-column">
+        <div class="simple-column-first">
+          <SimplecomponentsVueImageCarousel
+            :images="images"
+            :auto="true"
+            :ratio="'2:1'"
+          >
+            <div
+              v-for="(image, imageIndex) in images"
+              :key="imageIndex"
+              :slot="'content-' + image.key"
+              @click="printAlert('image with key: ' + image.key)"
+              class="simple-test-container-no-shadow"
+            >
+              <div>
+                <h3>Image with key {{ image.key }}</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nulla, magnam voluptates natus maiores doloremque ea pariatur
+                  id. Reprehenderit atque blanditiis veritatis eos iste aut
+                  laboriosam aspernatur dicta dolores, doloremque deserunt.
+                </p>
+              </div>
+            </div>
+          </SimplecomponentsVueImageCarousel>
         </div>
-      </SimplecomponentsVueImageCarousel>
-      <br />
-      <SimplecomponentsVueImageCarousel :images="images">
-        <div
-          v-for="(image, imageIndex) in images"
-          :key="imageIndex"
-          :slot="'content-shadow-' + image.key"
-          @click="printAlert('image with key: ' + image.key)"
-          class="simple-test-container"
-        >
-          <div>
-            <h3>Image with key {{ image.key }}</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
-              magnam voluptates natus maiores doloremque ea pariatur id.
-              Reprehenderit atque blanditiis veritatis eos iste aut laboriosam
-              aspernatur dicta dolores, doloremque deserunt.
-            </p>
-          </div>
+        <div class="simple-column-second">
+          <SimplecomponentsVueImageCarousel :images="images">
+            <div
+              v-for="(image, imageIndex) in images"
+              :key="imageIndex"
+              :slot="'content-shadow-' + image.key"
+              @click="printAlert('image with key: ' + image.key)"
+              class="simple-test-container"
+            >
+              <div>
+                <h3>Image with key {{ image.key }}</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nulla, magnam voluptates natus maiores doloremque ea pariatur
+                  id. Reprehenderit atque blanditiis veritatis eos iste aut
+                  laboriosam aspernatur dicta dolores, doloremque deserunt.
+                </p>
+              </div>
+            </div>
+          </SimplecomponentsVueImageCarousel>
         </div>
-      </SimplecomponentsVueImageCarousel>
+      </div>
     </div>
   </div>
 </template>
@@ -139,7 +144,31 @@ export default Vue.extend({
   padding-bottom: 20px;
 }
 
+.simple-test-container-no-shadow {
+  height: 100%;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
+}
+
+.simple-column {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .simple-column-first {
+    width: 66.7%;
+    padding-right: 5px;
+  }
+  .simple-column-second {
+    width: 33.4%;
+    padding-left: 5px;
+  }
+}
+
 .simple-container-son {
-  width: 50%;
+  width: 90%;
 }
 </style>
