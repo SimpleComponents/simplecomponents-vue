@@ -43,8 +43,11 @@ export default Vue.extend({
     <div class="simple-container-son">
       <SimplecomponentsVueFormImages
         name="images-testing"
-        text="Presiona aquí o arrastra las imagenes"
+        text="Presiona aquí o arrastra las imagenes (5 Max.)"
         :columns="4"
+        :maximum="5"
+        maximumText="límite excedido"
+        :timeout="4000"
         resume="Imagenes"
         @files="
           data => {

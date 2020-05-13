@@ -35,6 +35,10 @@
     </h4>
     <div v-if="files != null && files.length != 0" class="simple-image-resume">
       <div>
+        <span v-if="error" class="simple-image-resume-error">
+          <small>[{{ error.timeout }}]</small>
+          {{ maximumText ? maximumText : error.message }}
+        </span>
         <span>
           {{ files.length }}
           <span v-if="resume"> {{ resume }}</span>
@@ -66,10 +70,14 @@ export default {
     name: String,
     columns: Number,
     resume: String,
+    maximum: Number,
+    maximumText: String,
+    timeout: Number,
   },
   data() {
     return {
       files: [],
+      error: null,
       inputName:
         this.name != null || this.name != undefined
           ? this.name
@@ -78,12 +86,16 @@ export default {
   },
   methods: {
     uploadImages() {
-      document.getElementById(this.inputName).click();
+      if (this.error == null) {
+        document.getElementById(this.inputName).click();
+      }
     },
     handleFileDrop(e) {
-      let droppedFiles = e.dataTransfer.files;
-      if (!droppedFiles) return;
-      this.saveFiles(droppedFiles);
+      if (this.error == null) {
+        let droppedFiles = e.dataTransfer.files;
+        if (!droppedFiles) return;
+        this.saveFiles(droppedFiles);
+      }
     },
     imageFunction() {
       let inputFiles = this.$refs.inputFile.files;
@@ -118,7 +130,40 @@ export default {
   },
   watch: {
     files() {
-      this.$emit('files', this.files);
+      if (this.maximum) {
+        if (this.files && this.files.length > this.maximum) {
+          if (this.timeout) {
+            var timeout = this.timeout;
+          } else {
+            var timeout = 2000;
+          }
+          var startTime = Date.now();
+          this.error = {
+            message: 'Maximum files exceeded',
+            type: 'maximum',
+            timeout: Math.floor(timeout / 1000),
+          };
+          let interval = setInterval(() => {
+            var now = Date.now();
+            this.error.timeout = Math.floor(
+              (timeout - (now - startTime)) / 1000
+            );
+            if (timeout - (now - startTime) <= 200) {
+              clearInterval(interval);
+              return;
+            }
+          }, 1);
+          setTimeout(() => {
+            this.files = [];
+          }, timeout + 200);
+        } else {
+          this.error = null;
+          this.$emit('files', this.files);
+        }
+      } else {
+        this.error = null;
+        this.$emit('files', this.files);
+      }
     },
   },
 };

@@ -46,6 +46,13 @@
     padding-left: 1em;
     padding-right: 1em;
   }
+  .simple-image-resume-error {
+    color: rgba($color: red, $alpha: 0.7);
+    margin-right: 5px;
+    small {
+      font-weight: lighter;
+    }
+  }
 }
 
 .simple-background::before {
