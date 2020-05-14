@@ -4,6 +4,7 @@ import {
   SimplecomponentsVueFormImages,
   SimplecomponentsVueImageGrid,
   SimplecomponentsVueImageCarousel,
+  SimplecomponentsVueCard,
 } from '@/entry';
 
 export default Vue.extend({
@@ -12,6 +13,7 @@ export default Vue.extend({
     SimplecomponentsVueFormImages,
     SimplecomponentsVueImageGrid,
     SimplecomponentsVueImageCarousel,
+    SimplecomponentsVueCard,
   },
   data() {
     return {
@@ -33,6 +35,9 @@ export default Vue.extend({
         i++;
         return file;
       });
+    },
+    images() {
+      //console.log(this.images);
     },
   },
 });
@@ -124,6 +129,53 @@ export default Vue.extend({
           </SimplecomponentsVueImageCarousel>
         </div>
       </div>
+      <br />
+      <div class="simple-list-cards">
+        <SimplecomponentsVueCard
+          :contentPadding="true"
+          :image="images[0] ? images[0].url : ''"
+        >
+          <div class="simple-list-card-content">
+            <strong>category</strong>
+            <h3>Titulo</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil
+              debitis provident dolorem quod voluptatibus eveniet quos incidunt
+            </p>
+            <span>
+              $ 1990
+            </span>
+            <br />
+            <small>
+              ***** (34 views)
+            </small>
+          </div>
+        </SimplecomponentsVueCard>
+        <SimplecomponentsVueCard
+          :badgeText="'category'"
+          :image="images[0] ? images[0].url : ''"
+        >
+          <div class="simple-list-card-content">
+            <strong>category</strong>
+            <h3>Titulo</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil
+              debitis provident dolorem quod voluptatibus eveniet quos incidunt
+            </p>
+            <span>
+              $ 1990
+            </span>
+            <br />
+            <small>
+              ***** (34 views)
+            </small>
+          </div>
+        </SimplecomponentsVueCard>
+        <SimplecomponentsVueCard :image="images[0] ? images[0].url : ''">
+        </SimplecomponentsVueCard>
+        <SimplecomponentsVueCard :image="images[0] ? images[0].url : ''">
+        </SimplecomponentsVueCard>
+      </div>
     </div>
   </div>
 </template>
@@ -137,6 +189,49 @@ export default Vue.extend({
   align-items: center;
   padding-top: 40em;
   padding-bottom: 40em;
+}
+
+.simple-list-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  > div {
+    margin-right: 10px;
+  }
+}
+
+.simple-list-card-content {
+  > strong {
+    font-size: 11px;
+    color: rgba($color: #000000, $alpha: 0.65);
+    text-transform: uppercase;
+    margin: 0px;
+  }
+  > h3 {
+    margin: 0px;
+    margin-bottom: 2px;
+    font-size: 18px;
+    color: rgba($color: #000000, $alpha: 0.9);
+  }
+  > p {
+    font-size: 14px;
+    color: rgba($color: #000000, $alpha: 0.6);
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 0px;
+  }
+  > span {
+    font-size: 16px;
+  }
+  > small {
+    font-size: 14px;
+    color: rgba($color: #000000, $alpha: 0.6);
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 0px;
+  }
 }
 
 .simple-test-container {
