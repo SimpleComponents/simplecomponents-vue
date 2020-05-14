@@ -16,9 +16,7 @@
       </simple-carousel>
     </div>
     <div v-if="$slots.default" class="simple-card-separator" />
-    <div>
-      <slot></slot>
-    </div>
+    <slot></slot>
   </div>
 </template>
 
