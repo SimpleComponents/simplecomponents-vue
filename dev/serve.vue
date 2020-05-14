@@ -159,8 +159,7 @@ export default Vue.extend({
             <strong>category</strong>
             <h3>Titulo</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil
-              debitis provident dolorem quod voluptatibus eveniet quos incidunt
+              Lorem ipsum dolor sadipisicing elit. Nihil
             </p>
             <span>
               $ 1990
