@@ -155,6 +155,8 @@ export default {
   },
   watch: {
     images() {
+      this.pointer = 0;
+      this.previousBackground = '';
       this.files = this.images;
       if (
         this.auto &&
